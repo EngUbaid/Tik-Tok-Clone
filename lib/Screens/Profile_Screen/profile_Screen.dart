@@ -1,9 +1,15 @@
+// // ignore_for_file: file_names, prefer_final_fields
+
+// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations
+
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
 import 'package:tiktok/Screens/Profile_Screen/edit_Profile.dart';
 import 'package:tiktok/Screens/Profile_Screen/fullscreenvidio.dart';
 import 'package:tiktok/widget/profilebuton.dart';
-
 import 'package:video_player/video_player.dart';
+import 'package:get/get.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -18,8 +24,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     "222",
     "444",
     "66",
-    "777"
-        "888",
+    "777",
+    "888",
     "9999",
     "345",
     "35366",
@@ -59,16 +65,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final storage = GetStorage();
+// Retrieve saved user data
+
+    String userName = storage.read('userName') ?? 'Guest';
+    String userEmail = storage.read('userEmail') ?? 'No Email Provided';
+    String userregistarationdate = storage.read('userRegistarationDate') ??
+        'No registarationdate Provided';
+
+    String registarationdate = DateFormat('MMMM d, yyyy – h:mm a')
+        .format(DateTime.parse(userregistarationdate));
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         centerTitle: true,
-        title: const Text(
-          'username',
-          style: TextStyle(fontSize: 14),
+        title: Text(
+          userName,
+          style: TextStyle(
+              fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold),
         ),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.menu))],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -81,9 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   const CircleAvatar(
                     radius: 40,
-                    backgroundColor: Colors.black12,
-                    // backgroundImage: NetworkImage(
-                    //     'https://images.unsplash.com/photo-1695653422557-3b85c1d6d061?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8'),
+                    backgroundColor: Colors.black,
                   ),
                   Positioned(
                       bottom: 5,
@@ -98,8 +112,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           )))
                 ],
               ),
-              const Text(
-                '@ubaidullah',
+              Text(
+                '$userEmail',
+                style: TextStyle(fontWeight: FontWeight.normal),
+              ),
+              const SizedBox(
+                height: 9,
+              ),
+              Text(
+                '$registarationdate',
                 style: TextStyle(fontWeight: FontWeight.normal),
               ),
               const SizedBox(
@@ -160,6 +181,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   profileButtons(
                     tittle: 'Edit Profile',
+                    textcolor: Colors.white,
                     ontap: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
@@ -167,32 +189,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         },
                       ));
                     },
-                    color: Colors.black12,
+                    color: Colors.black,
                   ),
                   const SizedBox(
                     width: 8,
                   ),
                   profileButtons(
                     tittle: 'Share Profile',
+                    textcolor: Colors.white,
                     ontap: () {},
-                    color: Colors.black12,
+                    color: Colors.black,
                   ),
                 ],
               ),
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                "Welcome to my profile",
-                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w300),
-              ),
-              const Text(
-                'TikTok Studio',
-                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w300),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
+              // const Text(
+              //   "Welcome to my profile",
+              //   style: TextStyle(fontSize: 11, fontWeight: FontWeight.w300),
+              // ),
+              // const Text(
+              //   'TikTok Studio',
+              //   style: TextStyle(fontSize: 11, fontWeight: FontWeight.w300),
+              // ),
+              // const SizedBox(
+              //   height: 15,
+              // ),
               GridView.builder(
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
@@ -205,7 +228,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   //String pathv = 'Assets/Vadioes/vadioone.mp4';
                   // VideoPlayerController videoPlayerController =
                   //     VideoPlayerController.asset(pathv);
-                  String path = videoPaths[index];
+                  // String path = videoPaths[index];
                   VideoPlayerController controller = _videoControllers[index];
                   return GestureDetector(
                     onTap: () {
@@ -220,17 +243,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       );
                     },
                     child: Stack(
+                      fit: StackFit.expand,
                       children: [
-                        SizedBox(
-                            height: 500,
-                            width: 300,
-                            child: controller.value.isInitialized
-                                ? AspectRatio(
-                                    aspectRatio: controller.value.aspectRatio,
-                                    child: VideoPlayer(controller),
-                                  )
-                                : const Center(
-                                    child: CircularProgressIndicator())),
+                        FittedBox(
+                          fit: BoxFit.fitHeight,
+                          child: SizedBox(
+                              height: 350,
+                              width: 350,
+                              child: controller.value.isInitialized
+                                  ? AspectRatio(
+                                      aspectRatio: controller.value.aspectRatio,
+                                      child: VideoPlayer(controller),
+                                    )
+                                  : const Center(
+                                      child: CircularProgressIndicator())),
+                        ),
                         Positioned(
                             bottom: 5,
                             left: 4,
@@ -252,36 +279,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   );
-
-                  // ChewieController chewieController = ChewieController(
-                  //   videoPlayerController: videoPlayerController,
-                  //   aspectRatio: 1.0,
-
-                  //   autoPlay:
-                  //       false, // Set this to true if you want videos to play automatically
-                  //   looping: false,
-                  // );
-
-                  // return Chewie(controller: chewieController);
-
-                  // return InkWell(
-                  //   onTap: () {
-                  //     Navigator.push(context, MaterialPageRoute(
-                  //       builder: (context) {
-                  //         return ProfileVideoes(imagepath: pathv);
-                  //       },
-                  //     ));
-                  //   },
-                  //   // child:  Container(
-                  //   // color: Colors.green,
-                  //   child: Chewie(controller: chewieController),
-                  // );
-                  // return Container(
-                  //   color: Colors.green,
-                  //   child: Center(
-                  //     child: Text("video $index"),
-                  //   ),
-                  // );
                 },
               )
             ],

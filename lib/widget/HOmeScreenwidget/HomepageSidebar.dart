@@ -1,8 +1,19 @@
+// ignore_for_file: file_names, non_constant_identifier_names, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:tiktok/widget/HOmeScreenwidget/userprofile.dart';
 
 class HomepageSidebar extends StatefulWidget {
-  const HomepageSidebar({super.key});
+  final int likes;
+  final int comment;
+  final int save;
+  final int share;
+  const HomepageSidebar(
+      {super.key,
+      required this.likes,
+      required this.comment,
+      required this.save,
+      required this.share});
 
   @override
   State<HomepageSidebar> createState() => _HomepageSidebarState();
@@ -46,7 +57,7 @@ class _HomepageSidebarState extends State<HomepageSidebar> {
                 color: Colors.white,
                 size: 30,
               ),
-              "500",
+              widget.likes.toString(),
               style),
           const SizedBox(
             height: 15,
@@ -59,7 +70,7 @@ class _HomepageSidebarState extends State<HomepageSidebar> {
                 fit: BoxFit.cover,
                 color: Colors.white,
               ),
-              "1200",
+              widget.comment.toString(),
               style),
           const SizedBox(
             height: 15,
@@ -72,7 +83,7 @@ class _HomepageSidebarState extends State<HomepageSidebar> {
                 fit: BoxFit.cover,
                 color: Colors.white,
               ),
-              "500",
+              widget.save.toString(),
               style),
           const SizedBox(
             height: 15,
@@ -85,7 +96,7 @@ class _HomepageSidebarState extends State<HomepageSidebar> {
                 fit: BoxFit.cover,
                 color: Colors.white,
               ),
-              "2400",
+              widget.share.toString(),
               style),
           const SizedBox(
             height: 20,

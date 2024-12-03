@@ -1,5 +1,6 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
-import 'package:tiktok/widget/HOmeScreenwidget/HomepageSidebar.dart';
 import 'package:tiktok/widget/HOmeScreenwidget/Video_detail.dart';
 import 'package:video_player/video_player.dart';
 
@@ -91,13 +92,16 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
                       flex: 3,
                       child: SizedBox(
                         height: MediaQuery.of(context).size.height / 4,
-                        child: const VaidioDetail(),
+                        child: const VaidioDetail(
+                          name: '',
+                          decsription: '',
+                        ),
                       )),
-                  Expanded(
-                      child: SizedBox(
-                    height: MediaQuery.of(context).size.height / 1.76,
-                    child: const HomepageSidebar(),
-                  ))
+                  // Expanded(
+                  //     child: SizedBox(
+                  //   height: MediaQuery.of(context).size.height / 1.76,
+                  //   child: const HomepageSidebar(),
+                  // ))
                 ],
               )
             ],

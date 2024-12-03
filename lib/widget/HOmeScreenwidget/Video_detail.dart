@@ -1,14 +1,14 @@
+// ignore_for_file: prefer_const_constructors, file_names
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class VaidioDetail extends StatefulWidget {
-  const VaidioDetail({super.key});
+class VaidioDetail extends StatelessWidget {
+  final String name;
+  final String decsription;
+  const VaidioDetail(
+      {super.key, required this.name, required this.decsription});
 
-  @override
-  State<VaidioDetail> createState() => _VaidioDetailState();
-}
-
-class _VaidioDetailState extends State<VaidioDetail> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,13 +17,20 @@ class _VaidioDetailState extends State<VaidioDetail> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const Text(
-            "@ubaidullah",
+          Text(
+            name,
+            // "@ubaidullah",
             style: TextStyle(
                 fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           const SizedBox(
             height: 10,
+          ),
+          Text(
+            decsription,
+            // "@ubaidullah",
+            style: TextStyle(
+                fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           // const  ExpandableText(
           //     "This is vidio about nature this is one of the most beautiful place in pakistan  dh  cnvnslvks;v svlvklvjsjcposhjnvvjsovn,vsipgjruhlcansfwpdhiasklcnvsifgfihkczbcnzvjdighbasklxmchfhscas;mlgjiofhc",

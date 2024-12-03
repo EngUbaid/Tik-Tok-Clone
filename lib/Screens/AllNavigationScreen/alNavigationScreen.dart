@@ -1,7 +1,8 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tiktok/Screens/LoginScreen/loginscreen.dart';
-import 'package:tiktok/State_management/authprovider.dart';
 import 'package:tiktok/common/common.dart';
 
 class AllNavigationScreen extends StatefulWidget {
@@ -15,11 +16,6 @@ class _AllNavigationScreenState extends State<AllNavigationScreen> {
   int pageindex = 0;
   @override
   Widget build(BuildContext context) {
-    final isLoggedIn = context.watch<AuthProvider>().isLoggedIn;
-
-    if (!isLoggedIn) {
-      return const Loginscreen();
-    }
     return Scaffold(
       body: pages[pageindex],
       bottomNavigationBar: BottomNavigationBar(

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:tiktok/common/chat_Listtile.dart';
 import 'package:tiktok/common/common_circleavtar.dart';

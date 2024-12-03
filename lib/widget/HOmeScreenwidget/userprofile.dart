@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_final_fields
+
 import 'package:flutter/material.dart';
 import 'package:tiktok/Screens/Profile_Screen/fullscreenvidio.dart';
 import 'package:tiktok/widget/profilebuton.dart';
@@ -190,7 +192,7 @@ class _UserProfileState extends State<UserProfile> {
                   //String pathv = 'Assets/Vadioes/vadioone.mp4';
                   // VideoPlayerController videoPlayerController =
                   //     VideoPlayerController.asset(pathv);
-                  String path = videoPaths[index];
+                  // String path = videoPaths[index];
                   VideoPlayerController controller = _videoControllers[index];
                   return GestureDetector(
                     onTap: () {
